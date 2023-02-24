@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 // import { AppController } from './app.controller';
 // import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
+import { DbModule } from './db/db.module';
 
 @Module({
-  imports: [TasksModule],
+  imports: [TasksModule, DbModule],    //Db module is where we are setting the connection 
   // controllers: [AppController],
   // providers: [AppService],
 })
