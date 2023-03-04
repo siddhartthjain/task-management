@@ -1,4 +1,4 @@
-import { task_contract } from 'src/tasks/repositories/contract';
+import { task_contract } from 'src/tasks/repositories/task_contract';
 // import { RepositoryContract } from './db/repository/contract';
 
 export function InjectModel(model: any) {

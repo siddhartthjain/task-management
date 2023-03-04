@@ -1,4 +1,4 @@
-import { Controller, ValidationPipe } from '@nestjs/common';
+import { Controller, ParseIntPipe, ValidationPipe } from '@nestjs/common';
 import { Body, Delete, Get, Inject, Param, Patch, Post, Query, UsePipes } from '@nestjs/common/decorators';
 import { Knex } from 'knex';
 import { userInfo } from 'os';
@@ -7,60 +7,71 @@ import { CreateTaskdto } from './dto/createtask.dto';
 import { taskfilterdto } from './dto/taskfilter.dto';
 import { filterpipe } from './pipes/filterpipe';
 import { taskvalidationpipe } from './pipes/Taskvalidationpipe';
-import { task_contract } from './repositories/contract';
-import { Task, Taskstatus } from './tasks.model';
+import { task_contract } from './repositories/task_contract';
+// import { Task, Taskstatus } from './tasks.model';
 import { TasksService } from './tasks.service';
+import { task } from './Models/task_model';
+import { Taskstatus } from 'src/task.status.enum';
 
 @Controller('tasks')
 export class TasksController {
-    constructor (private taskservice: TasksService, @Inject("task_database_connect") private db_connect: task_contract ){}
+    constructor (
+      private taskservice: TasksService,
+       @Inject("task_repository") private task_repository: task_contract ){}  //"task_repository" == provided on provider,variable = task_repository,task_contract == contract in repository 
 
-    @Get("/test")
+    // @Get("/test")
 
-    async gettest()
-    {
-      const data= await this.db_connect.function1()
-      return data;
-    }
+    // async gettest()
+    // {
+    //   const data= await this.task_repository.function1()
+    //   return data;
+    // }
     
 
     @Get()
     
-    getAlltasks( @Query(filterpipe) filter: taskfilterdto ): Task[]
+    getAlltasks( @Query(filterpipe) filter: taskfilterdto ): Promise<task[]>
     {
       
-      if(filter && Object.keys(filter).length)
-      {    
-       return this.taskservice.getTaskbyFilter(filter);
-      }
-      else{
-         return  this.taskservice.getAlltasks();
-      }
+      
+      
+      // if(filter)
+      // {    
+        // console.log(filter);
+        
+       return this.task_repository.getalltasks(filter);
+          
+      // }
+      // else{
+      //    return  this.taskservice.getAlltasks();
+      // }
+      // return this.task_repository.getalltasks()
        
     }
 
     @Post()
     //  @UsePipes(ValidationPipe)
-    createTask( @Body() createtaskdto: CreateTaskdto ): Task
+    createTask( @Body() createtaskdto: CreateTaskdto ): Promise<task>
     {
-       return this.taskservice.createTask(createtaskdto);
+       return this.task_repository.posttask(createtaskdto);
        
     }
 
     @Get('/:id')
-    getTaskbyId(@Param('id') id:string): Task
+    getTaskbyId(@Param('id', ParseIntPipe) id:number): Promise<task>
     {
-      return this.taskservice.getTaskbyId(id);
+
+      return this.task_repository.getbyId(id);
     }
     @Delete('/:id')
-    deleteTask(@Param('id') id: string)
+    deleteTask(@Param('id', ParseIntPipe) id: number)
     {
-      return this.taskservice.deleteTask(id);
+      return this.task_repository.deletebyId(id);
     }
     @Patch('/:id/status')
     // @UsePipes(ValidationPipe)
-    updateTaskstatus(@Param('id') id:string ,@Body('status', taskvalidationpipe) status: Taskstatus): Task
+    updateTaskstatus(@Param('id', ParseIntPipe) id:number ,@Body('status', taskvalidationpipe) status: Taskstatus): Promise<task>
     {
-      return this.taskservice.updateTaskstatus(id,status);
+      return this.task_repository.updateTask(id,status)
     }
 }

@@ -17,7 +17,8 @@ export class taskvalidationpipe implements PipeTransform
             
             return true
         }
-        else{
+        else
+        {
             return false;
         }
     }
@@ -30,7 +31,8 @@ export class taskvalidationpipe implements PipeTransform
     {
        return value;
     }
-    else{
+    else
+    {
         throw new BadRequestException(`${value} is not valid status` );
     }
 

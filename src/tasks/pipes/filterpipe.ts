@@ -35,6 +35,10 @@ export class filterpipe implements PipeTransform
             throw new BadRequestException(`${value.status} is not valid status` );
         }
     }
+    else
+    {
+        return value;
+    }
     
 
     
