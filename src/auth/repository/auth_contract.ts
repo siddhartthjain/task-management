@@ -7,4 +7,5 @@ export interface auth_contract
     // userlogin(credentaildto : Credentialdto):Promise<void>
     usersignin(credentialdto: Credentialdto):Promise<{accestoken:string}>
     getusername(username:string): Promise<User>
+    getallusers():any
 }

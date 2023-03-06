@@ -1,5 +1,6 @@
 import { knex } from 'knex';
 import { Model } from 'objection';
+import { BaseModel } from './BaseModel';
 // import { BaseModel } from './db/BaseModel';
 
 export const databaseProviders = [
@@ -17,21 +18,14 @@ export const databaseProviders = [
           database: 'task_database',
         },
       });
-      Model.knex(knex_connection);
-    // //   BaseModel.setModulePaths([
-    //     // add your module names here
-    //     'students',
-    //     'classes',
-    //     'users',
-    //     'posts',
-    //     'comments',
-    //     'departments',
-    //     'employees',
-    //     'employees_roles',
-    //     'roles',
-    //   ]);
-      //BaseModel.setModulePaths(['customers', 'orders']);
-      //Model.knex(knex_connection);
+      BaseModel.knex(knex_connection);
+      BaseModel.setModulePaths([
+        
+        // you have to write here your folder name of new module because it create automatic path in defing relation mapping 
+        'auth',
+        'tasks'
+      ]);
+  
       return knex_connection;
     },
   },

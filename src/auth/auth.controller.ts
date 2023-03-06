@@ -40,6 +40,12 @@ export class AuthController {
     //     console.log(req.user);
         
     // }
+    @Get('/getusers')
+    async getusers()
+    {
+        return await this.auth_repo.getallusers(); 
+    }
+    
     
     
     

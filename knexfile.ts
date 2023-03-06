@@ -1,4 +1,5 @@
-import type { Knex } from "knex";
+// import type { Knex } from "knex";
+import {Knex} from "knex";
 // import { dirname } from "path";
 
 // Update with your config settings.

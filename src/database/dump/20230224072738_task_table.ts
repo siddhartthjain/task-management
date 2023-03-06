@@ -11,6 +11,7 @@ export async function up(knex: Knex): Promise<void> {
       table.string('title').notNullable();
       table.string('description').notNullable();
       table.string('status').notNullable();
+      table.integer('user_id').unsigned().references('users_table.id').onDelete('CASCADE');
 
     })
 }
@@ -18,6 +19,6 @@ export async function up(knex: Knex): Promise<void> {
 
 export async function down(knex: Knex): Promise<void> {
     return knex.schema
-    .dropTable('task_table')
+    .dropTableIfExists('task_table')
 }
 

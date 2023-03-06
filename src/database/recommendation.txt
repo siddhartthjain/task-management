@@ -1,0 +1,3 @@
+see there are many ways to create table 
+if table data is not important then rollback and edit the file and migrate 
+if data is important then make new migration file and then add null feild in column(if reqd)

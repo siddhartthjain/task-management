@@ -10,7 +10,7 @@ import { auth_repository } from './repository/auth_repository';
 @Module({
 
   imports:[
-    PassportModule.register({defaultStrategy:'jwt'}),       // we need to specicaaly import them bec they are samll frameworks and  they can be customised do they are like more of dependencies whereas the other librrary has fixed work and can be modified therefor no need to add injectable theer
+    PassportModule.register({defaultStrategy:'jwt'}),       // we need to specically import them bec they are samll frameworks and  they can be customised do they are like more of dependencies whereas the other librrary has fixed work and can be modified therefor no need to add injectable theer
 JwtModule.register({
   secret: "topsecret51",   // topsecretkey that is what your token will be signed with
   signOptions:{

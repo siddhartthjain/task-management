@@ -44,6 +44,12 @@ export class auth_repository implements auth_contract
        
     }
      
+    async getallusers()
+    {
+        const data=  User.query().withGraphFetched('tasks')
+        data.debug();
+        return await data;
+    }
     async getusername(username) :Promise<User>
     {
          const user = User.query().where('username', username).first();
@@ -61,8 +67,8 @@ export class auth_repository implements auth_contract
     {
         const {username, password}= credentialdto;
      try {
-        const user = User.query().where('username', username).first();
-        // console.log(user);
+        const user = await User.query().where('username', username).first();
+         console.log(user);
         
         if(user)
         {
@@ -80,8 +86,12 @@ export class auth_repository implements auth_contract
             
   
         }
+        else{
+            throw new HttpException("Invalid Credential", HttpStatus.UNAUTHORIZED)
+        }
      } catch (error) {
-        return error;
+         
+         return  error;
         // console.log(error)
      }
         

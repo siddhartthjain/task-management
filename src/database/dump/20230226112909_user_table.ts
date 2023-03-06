@@ -8,6 +8,7 @@
 //       table.string('username').notNullable().unique();
 //       table.string('password').notNullable();
 //       table.string('user_salt');
+      
     
 //     })
       
@@ -17,6 +18,6 @@
 
 // export async function down(knex: Knex): Promise<void> {
 //     return knex.schema
-//     .dropTable('user_table')
+//     .dropTableIfExists('user_table')
 // }
 

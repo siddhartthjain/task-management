@@ -1,6 +1,18 @@
 import { Controller, ParseIntPipe, ValidationPipe } from '@nestjs/common';
-import { Body, Delete, Get, Inject, Param, Patch, Post, Query, UsePipes } from '@nestjs/common/decorators';
-import { Knex } from 'knex';
+import {
+  Body,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Patch,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+  UsePipes,
+} from '@nestjs/common/decorators';
+
 import { userInfo } from 'os';
 import { title } from 'process';
 import { CreateTaskdto } from './dto/createtask.dto';
@@ -12,66 +24,51 @@ import { task_contract } from './repositories/task_contract';
 import { TasksService } from './tasks.service';
 import { task } from './Models/task_model';
 import { Taskstatus } from 'src/task.status.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('tasks')
+@UseGuards(AuthGuard())
 export class TasksController {
-    constructor (
-      private taskservice: TasksService,
-       @Inject("task_repository") private task_repository: task_contract ){}  //"task_repository" == provided on provider,variable = task_repository,task_contract == contract in repository 
+  constructor(
+    private taskservice: TasksService,
+    @Inject('task_repository') private task_repository: task_contract,
+  ) {} //"task_repository" == provided on provider,variable = task_repository,task_contract == contract in repository
 
-    // @Get("/test")
+  @Get()
+  getAlltasks(@Query(filterpipe) filter: taskfilterdto, @Req() req): Promise<task[]> {
+   
+   const user =req.user;
+    return this.task_repository.getalltasks(filter, user);
 
-    // async gettest()
-    // {
-    //   const data= await this.task_repository.function1()
-    //   return data;
-    // }
-    
 
-    @Get()
-    
-    getAlltasks( @Query(filterpipe) filter: taskfilterdto ): Promise<task[]>
-    {
-      
-      
-      
-      // if(filter)
-      // {    
-        // console.log(filter);
-        
-       return this.task_repository.getalltasks(filter);
-          
-      // }
-      // else{
-      //    return  this.taskservice.getAlltasks();
-      // }
-      // return this.task_repository.getalltasks()
-       
-    }
+  }
 
-    @Post()
-    //  @UsePipes(ValidationPipe)
-    createTask( @Body() createtaskdto: CreateTaskdto ): Promise<task>
-    {
-       return this.task_repository.posttask(createtaskdto);
-       
-    }
+  @Post()
+  //  @UsePipes(ValidationPipe)
+  createTask(@Body() createtaskdto: CreateTaskdto, @Req() req): Promise<task> {
+    const user = req.user;
 
-    @Get('/:id')
-    getTaskbyId(@Param('id', ParseIntPipe) id:number): Promise<task>
-    {
+    return this.task_repository.posttask(createtaskdto, user);
+  }
 
-      return this.task_repository.getbyId(id);
-    }
-    @Delete('/:id')
-    deleteTask(@Param('id', ParseIntPipe) id: number)
-    {
-      return this.task_repository.deletebyId(id);
-    }
-    @Patch('/:id/status')
-    // @UsePipes(ValidationPipe)
-    updateTaskstatus(@Param('id', ParseIntPipe) id:number ,@Body('status', taskvalidationpipe) status: Taskstatus): Promise<task>
-    {
-      return this.task_repository.updateTask(id,status)
-    }
+  @Get('/:id')
+  getTaskbyId(@Param('id', ParseIntPipe) id: number, @Req() req): Promise<task> {
+    const user = req.user;
+    return this.task_repository.getbyId(id, user);
+  }
+  @Delete('/:id')
+  deleteTask(@Param('id', ParseIntPipe) id: number, @Req() req) {
+    const user = req.user;
+    return this.task_repository.deletebyId(id, user);
+  }
+  @Patch('/:id')
+  // @UsePipes(ValidationPipe)
+  updateTaskstatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', taskvalidationpipe) status: Taskstatus,
+    @Req() req
+  ): Promise<task> {
+    const user = req.user;
+    return this.task_repository.updateTask(id, status, user);
+  }
 }
