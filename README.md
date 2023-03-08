@@ -19,15 +19,15 @@
 This application's development is divided into different branches, each representing a specific software development phase. The following is a list of branches and their purposes:
 
 <ol>
-1.master: The initial branch with basic validation.
+1.master(https://github.com/siddhartthjain/task-management/tree/master): The initial branch with basic validation.
   <br>
-2.branch1 : Branch1 with ehnaced validation and better code structuring with better architecture
+2.branch1(https://github.com/siddhartthjain/task-management/tree/branch1) : Branch1 with ehnaced validation and better code structuring with better architecture
   <br>
-3.branch2: Branch2 Connecting with Relational database.
+3.branch2(https://github.com/siddhartthjain/task-management/tree/branch2): Branch2 Connecting with Relational database.
   <br>
-4.branch3: Branchjwt authentication of users.
+4.branch3(https://github.com/siddhartthjain/task-management/tree/branchjwt): Branchjwt authentication of users.
   <br>
-5.branch4: backendbranch with complete backned with better architecture and flow
+5.branch4(https://github.com/siddhartthjain/task-management/tree/backnendbranch): backendbranch with complete backned with better architecture and flow
   <br<
 </ol>
 
@@ -42,7 +42,8 @@ To run this application, you must have the following:
 3.Sql Database
   <br>
 </ol>
-#Installation and Usage
+
+<h1>Installation and Usage</h1>
 
 Clone this repository to your local machine:
 ```
