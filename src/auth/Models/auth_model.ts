@@ -11,7 +11,7 @@ export class User extends BaseModel
     user_salt:string;  
     static get relationMappings()
    {
-      console.log("im here");
+      // console.log("im here");
     //   const Task= require('../../tasks/Models/task_model');
       return {
          tasks:

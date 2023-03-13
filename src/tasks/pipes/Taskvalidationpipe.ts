@@ -8,7 +8,7 @@ export class taskvalidationpipe implements PipeTransform
     readonly allowedstatuses=[Taskstatus.DONE, Taskstatus.IN_PROGRESS, Taskstatus.OPEN]
     private isstatusvalid(status:any): boolean
     {
-        // console.log(status);
+         console.log(status);
         
         const ind= this.allowedstatuses.findIndex((s)=>{return s==status});
         if(ind!=-1)
@@ -29,6 +29,7 @@ export class taskvalidationpipe implements PipeTransform
     
     if(this.isstatusvalid(value))
     {
+        console.log("im valid")
        return value;
     }
     else

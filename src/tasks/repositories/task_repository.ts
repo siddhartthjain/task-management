@@ -23,19 +23,28 @@ export class task_repository implements task_contract {
     try {
       let tasks = task.query().withGraphFetched('user').where('user_id',user.id);
       const { status, search } = filter;
-
-      if (status !== undefined) {
-        // console.log("im here");
-        tasks = tasks.where('status', status);
-      }
+      
       if (search !== undefined) {
         // console.log("failure");
         tasks = tasks
           .where('title', 'like', `%${search}%`)
-          .orWhere('description', 'like', `%${search}%`);
+          
+          tasks= tasks.orWhere('description', 'like', `%${search}%`);
       }
-
-      let task3 = await tasks;
+      if (status !== undefined) {
+        // console.log("im here");
+        tasks = tasks.where('status', status);
+      }
+      
+   
+      tasks.orderByRaw(`CASE status \
+       when status="open" THEN 4 \
+        when status="in_progress" THEN 3 \
+         when status = "done" THEN 2 \
+          ELSE 1 end`);
+      console.log(tasks.debug())
+      const task3= await tasks;
+      console.log(task3)
       return task3;
     } catch (error) {
       return error.message;

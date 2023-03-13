@@ -1,14 +1,36 @@
-import { knex } from 'knex';
+import { Knex, knex } from 'knex';
 import { Model } from 'objection';
 import { BaseModel } from './BaseModel';
+// import {config} from '../../knexfile'
 // import { BaseModel } from './db/BaseModel';
 
 export const databaseProviders = [
   {
+    
+      
+
     provide: 'DATABASE_CONNECTION',
     imports: [],
     useFactory: async () => {
-      const knex_connection = knex({
+      let knex_connection;
+      if(process.env.NODE_ENV==='production')
+      {
+         knex_connection= knex(
+          {
+            client:'mysql',
+            connection:
+            {
+              database: "task_database",
+              user: "root",
+              password: "Password&123"
+
+            }
+          }
+        )
+      }
+      else{
+        knex_connection = knex(
+        {
         client: 'mysql',
         connection: {
           host: 'localhost',
@@ -17,7 +39,12 @@ export const databaseProviders = [
           password: 'admin',
           database: 'task_database',
         },
-      });
+      }
+     
+      
+      );
+      }
+      
       BaseModel.knex(knex_connection);
       BaseModel.setModulePaths([
         
