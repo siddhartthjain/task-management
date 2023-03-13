@@ -8,7 +8,7 @@ import { AppService } from './app.service';
 
 
 
-@Controller('/')
+@Controller('')
 
 export class AppController {
   constructor(
