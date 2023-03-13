@@ -9,7 +9,7 @@ async function bootstrap() {
  app.useGlobalPipes(new ValidationPipe())
   if(process.env.NODE_ENV==='production')
   {
-    app.enableCors({origin: "http://nestjs-task-management-frontend-sid.s3-website.ap-south-1.amazonaws.com/"})
+    app.enableCors({origin: "http://nestjs-task-management-frontend-sid.s3-website.ap-south-1.amazonaws.com"})
   }
   app.enableCors();
  
