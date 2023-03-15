@@ -38,11 +38,17 @@ export const databaseProviders = [
         {
         client: 'mysql',
         connection: {
-          host: 'localhost',
-          port: 3306,
-          user: 'root',
-          password: 'admin',
-          database: 'task_database',
+          // host: 'localhost',
+          // port: 3306,
+          // user: 'root',
+          // password: 'admin',
+          // database: 'task_database',
+          host:"awseb-e-subv2ibfr8-stack-awsebrdsdatabase-xwclk15kp5h5.cqstehnlbdqp.us-east-2.rds.amazonaws.com",
+              port:3306,
+          
+              user: "root",
+              password: "Password&123",
+              database:"ebdb"
         },
       }
      
