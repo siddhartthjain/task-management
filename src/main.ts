@@ -11,7 +11,10 @@ async function bootstrap() {
   {
     app.enableCors({origin: "http://nestjs-task-management-frontend-sid.s3-website.ap-south-1.amazonaws.com"})
   }
-  app.enableCors();
+  else{
+    app.enableCors();
+  }
+  
  
  
   await app.listen(process.env.PORT || 3000);

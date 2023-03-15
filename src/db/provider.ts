@@ -14,7 +14,8 @@ export const databaseProviders = [
     useFactory: async () => {
       let knex_connection;
       if(process.env.NODE_ENV==='production')
-      {
+      { 
+        console.log("in production")
          knex_connection= knex(
           {
             client:'mysql',
@@ -32,6 +33,7 @@ export const databaseProviders = [
         )
       }
       else{
+        console.log("in dev")
         knex_connection = knex(
         {
         client: 'mysql',
