@@ -24,7 +24,7 @@ export const databaseProviders = [
               port:3306,
           
               user: "root",
-              password: "admin",
+              password: "Password&123",
               database:"ebdb"
 
             }
