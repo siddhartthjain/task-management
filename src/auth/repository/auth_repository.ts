@@ -30,6 +30,7 @@ export class auth_repository implements auth_contract
          console.log(dummy.password);
          
           await User.query().insert(dummy) 
+          console.log("runned succesfully");
         } 
         catch (error) {
             if (error instanceof UniqueViolationError)
@@ -68,7 +69,8 @@ export class auth_repository implements auth_contract
         const {username, password}= credentialdto;
      try {
         const user = await User.query().where('username', username).first();
-         console.log(user);
+        console.log("awaiting for user to come")
+         console.log("consoling user",user);
         
         if(user)
         {

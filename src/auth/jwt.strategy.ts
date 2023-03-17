@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Inject } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import {Strategy, ExtractJwt} from 'passport-jwt'
@@ -21,7 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy)
    
     async validate(payload :jwtpayload) :Promise<User>  // this function is very imp as it is returning a user object in req
     {
-        console.log(payload);
+        console.log("payload is ", payload);
         
        const {username} = payload;  // here we get payload which we can use further to edit  the request to our need
        const user= await this.auth_repo.getusername(username);
