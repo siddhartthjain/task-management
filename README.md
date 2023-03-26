@@ -4,14 +4,18 @@
 
 **Features:-**
   
-   -Secure authentication and validation for each employee account
+   - Secure authentication and validation for each employee account
+    <br>
+   - Create new tasks and assign them to oneself
+    <br>
+   - View and manage existing tasks
+    <br>
+   - Change the status of assigned tasks
+    <br>
+   - Deployed on AWS on ELastik Beanstalk With Custom CI/CD pipelining , AWS RDS, Static hosting
    <br>
-   -Create new tasks and assign them to oneself
-   <br>
-   -View and manage existing tasks
-   <br>
-   -Change the status of assigned tasks
-   <br>
+
+**NOTE:Due to end of my free Tier I have terminated my Aws Deployment However you can access the Frontend of application :-http://nestjs-task-management-frontend-sid.s3-website.ap-south-1.amazonaws.com**
 
 
 **Development Branches**
@@ -21,13 +25,13 @@ This application's development is divided into different branches, each represen
 <ol>
 1.master(https://github.com/siddhartthjain/task-management/tree/master): The initial branch with basic validation.
   <br>
-2.branch1(https://github.com/siddhartthjain/task-management/tree/branch1) : Branch1 with ehnaced validation and better code structuring with better architecture
+2.branch1(https://github.com/siddhartthjain/task-management/tree/branch1) : Branch1 with ehnanced validation and better code structuring  and  architecture
   <br>
 3.branch2(https://github.com/siddhartthjain/task-management/tree/branch2): Branch2 Connecting with Relational database.
   <br>
 4.branch3(https://github.com/siddhartthjain/task-management/tree/branchjwt): Branchjwt authentication of users.
   <br>
-5.branch4(https://github.com/siddhartthjain/task-management/tree/backnendbranch): backendbranch with complete backned with better architecture and flow
+5.branch4(https://github.com/siddhartthjain/task-management/tree/backnendbranch): backendbranch with complete backend with better architecture and flow
   <br<
 </ol>
 
